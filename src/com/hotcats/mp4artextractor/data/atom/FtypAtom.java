@@ -19,7 +19,7 @@ public class FtypAtom extends Atom {
     return majorBrand;
   }
 
-  public byte[] getMinorVerison() {
+  public byte[] getMinorVersion() {
     return minorVersion;
   }
 
@@ -32,7 +32,7 @@ public class FtypAtom extends Atom {
     StringBuilder builder = new StringBuilder();
     builder.append(super.toString());
     builder.append("  major brand: ").append(bytesToString(getMajorBrand())).append('\n');
-    builder.append("  minor version: ").append(bytesToString(getMajorBrand())).append('\n');
+    builder.append("  minor version: ").append(bytesToString(getMinorVersion())).append('\n');
     builder.append("  compatible brands:").append('\n');
     for (byte[] compatibleBrand : getCompatibleBrands()) {
       builder.append("    ").append(bytesToString(compatibleBrand)).append('\n');
