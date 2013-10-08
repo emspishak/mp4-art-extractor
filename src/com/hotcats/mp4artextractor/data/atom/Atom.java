@@ -17,18 +17,4 @@ public abstract class Atom {
   public int getSize() {
     return size;
   }
-
-  public String bytesToString(byte[] bytes) {
-    return new String(bytes);
-  }
-
-  @Override
-  public String toString() {
-    // TODO: print raw byes too
-    // TODO: clean up this key/value type printing
-    StringBuilder builder = new StringBuilder();
-    builder.append("type: ").append(getType()).append('\n');
-    builder.append("  size: ").append(getSize()).append('\n');
-    return builder.toString();
-  }
 }

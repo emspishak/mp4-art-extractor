@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.parse.Mp4FileParser;
+import com.hotcats.mp4artextractor.printer.Mp4FilePrinter;
 
 public class Mp4ArtExtractor {
 
@@ -25,6 +26,6 @@ public class Mp4ArtExtractor {
 
     Mp4FileParser parser = new Mp4FileParser(fileInput);
     Mp4File file = parser.parse();
-    System.out.println(file);
+    Mp4FilePrinter.print(file);
   }
 }

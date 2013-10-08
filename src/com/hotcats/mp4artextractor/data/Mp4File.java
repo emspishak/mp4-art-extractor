@@ -18,15 +18,6 @@ public class Mp4File {
     return atoms;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    for (Atom a : atoms) {
-      builder.append(a);
-    }
-    return builder.toString();
-  }
-
   public static class Builder {
 
     private final List<Atom> atoms;
