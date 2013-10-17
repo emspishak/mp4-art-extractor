@@ -8,6 +8,10 @@ import java.util.Arrays;
 import com.hotcats.mp4artextractor.data.atom.Atom;
 
 public abstract class AtomParser {
+
+  public static final int INT_SIZE = 4;
+  public static final int LONG_SIZE = 4;
+  public static final int TYPE_SIZE = 4;
   public static final byte[] FTYP_BYTES = {'f', 't', 'y', 'p'};
 
   private final FileInputStream fileInput;
@@ -36,7 +40,7 @@ public abstract class AtomParser {
       // last atom of file
     }
 
-    byte[] type = readBytes(fileInput, 4);
+    byte[] type = readBytes(fileInput, TYPE_SIZE);
 
     long extendedSize = 0;
     if (size == 1) {
@@ -55,7 +59,7 @@ public abstract class AtomParser {
   }
 
   private static int readInt(FileInputStream fileInput) throws IOException {
-    byte[] bytes = readBytes(fileInput, 4);
+    byte[] bytes = readBytes(fileInput, INT_SIZE);
     return ByteBuffer.wrap(bytes).getInt();
   }
 
@@ -64,7 +68,7 @@ public abstract class AtomParser {
   }
 
   private static long readLong(FileInputStream fileInput) throws IOException {
-    byte[] bytes = readBytes(fileInput, 8);
+    byte[] bytes = readBytes(fileInput, LONG_SIZE);
     return ByteBuffer.wrap(bytes).getLong();
   }
 
