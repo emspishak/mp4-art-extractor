@@ -4,10 +4,12 @@ package com.hotcats.mp4artextractor.data.atom;
 public abstract class Atom {
   private final AtomType type;
   private final int size;
+  private final long extendedSize;
 
-  public Atom(AtomType type, int size) {
+  public Atom(AtomType type, int size, long extendedSize) {
     this.type = type;
     this.size = size;
+    this.extendedSize = extendedSize;
   }
 
   public AtomType getType() {
@@ -16,5 +18,9 @@ public abstract class Atom {
 
   public int getSize() {
     return size;
+  }
+
+  public long getExtendedSize() {
+    return extendedSize;
   }
 }

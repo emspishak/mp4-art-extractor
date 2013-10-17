@@ -8,8 +8,9 @@ public class FtypAtom extends Atom {
   private final byte[] minorVersion;
   private final List<byte[]> compatibleBrands;
 
-  public FtypAtom(int size, byte[] majorBrand, byte[] minorVersion, List<byte[]> compatibleBrands) {
-    super(AtomType.FTYP, size);
+  public FtypAtom(int size, long extendedSize, byte[] majorBrand,
+      byte[] minorVersion, List<byte[]> compatibleBrands) {
+    super(AtomType.FTYP, size, extendedSize);
     this.majorBrand = majorBrand;
     this.minorVersion = minorVersion;
     this.compatibleBrands = compatibleBrands;

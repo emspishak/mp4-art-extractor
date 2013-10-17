@@ -18,6 +18,7 @@ public class Mp4FilePrinter {
   public static void print(Atom atom) {
     System.out.println("type: " + atom.getType());
     System.out.println("  size: " + atom.getSize());
+    System.out.println("  extendedSize: " + atom.getExtendedSize());
     switch (atom.getType()) {
     case FTYP:
       printFtypAtom((FtypAtom) atom);
