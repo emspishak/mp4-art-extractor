@@ -15,16 +15,23 @@ public abstract class AtomParser {
   public static final byte[] FTYP_BYTES = { 'f', 't', 'y', 'p' };
 
   private final FileInputStream fileInput;
+  private int bytesRead;
   private final int size;
   private final long extendedSize;
 
-  public AtomParser(FileInputStream fileInput, int size, long extendedSize) {
+  public AtomParser(FileInputStream fileInput, int bytesRead, int size,
+      long extendedSize) {
     this.fileInput = fileInput;
+    this.bytesRead = bytesRead;
     this.size = size;
     this.extendedSize = extendedSize;
   }
 
   public abstract Atom parse() throws IOException;
+
+  protected int getBytesRead() {
+    return bytesRead;
+  }
 
   public int getSize() {
     return size;
@@ -36,20 +43,26 @@ public abstract class AtomParser {
 
   public static AtomParser getAtomParser(FileInputStream fileInput)
       throws IOException {
+    int bytesRead = 0;
+
     int size = readInt(fileInput);
+    bytesRead += INT_SIZE;
+
     if (size == 0) {
       // last atom of file
     }
 
     byte[] type = readBytes(fileInput, TYPE_SIZE);
+    bytesRead += TYPE_SIZE;
 
     long extendedSize = 0;
     if (size == 1) {
       extendedSize = readLong(fileInput);
+      bytesRead += LONG_SIZE;
     }
 
     if (Arrays.equals(FTYP_BYTES, type)) {
-      return new FtypAtomParser(fileInput, size, extendedSize);
+      return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
     }
     throw new UnsupportedOperationException("Illegal type: "
         + Arrays.toString(type) + " (" + new String(type) + ")");
@@ -74,6 +87,7 @@ public abstract class AtomParser {
   }
 
   protected byte[] readBytes(int num) throws IOException {
+    bytesRead += num;
     return readBytes(fileInput, num);
   }
 

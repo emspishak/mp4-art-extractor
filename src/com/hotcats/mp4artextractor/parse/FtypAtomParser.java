@@ -13,26 +13,21 @@ public class FtypAtomParser extends AtomParser {
   private static final int MINOR_VERSION_SIZE = 4;
   private static final int COMPATIBLE_BRAND_SIZE = 4;
 
-  public FtypAtomParser(FileInputStream fileInput, int size, long extendedSize) {
-    super(fileInput, size, extendedSize);
+  public FtypAtomParser(FileInputStream fileInput, int bytesRead, int size,
+      long extendedSize) {
+    super(fileInput, bytesRead, size, extendedSize);
   }
 
   @Override
   public FtypAtom parse() throws IOException {
-    // For size and type.
-    int bytesRead = 8;
-
     byte[] majorBrand = readBytes(MAJOR_BRAND_SIZE);
-    bytesRead += MAJOR_BRAND_SIZE;
-
     byte[] minorVersion = readBytes(MINOR_VERSION_SIZE);
-    bytesRead += MINOR_VERSION_SIZE;
 
     List<byte[]> compatibleBrands = new ArrayList<>();
-    while (bytesRead < getSize()) {
+    while (getBytesRead() < getSize()) {
       compatibleBrands.add(readBytes(COMPATIBLE_BRAND_SIZE));
-      bytesRead += COMPATIBLE_BRAND_SIZE;
     }
+
     return new FtypAtom(getSize(), getExtendedSize(), majorBrand, minorVersion,
         compatibleBrands);
   }
