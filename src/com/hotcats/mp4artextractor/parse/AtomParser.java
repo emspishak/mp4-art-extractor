@@ -12,7 +12,7 @@ public abstract class AtomParser {
   public static final int INT_SIZE = 4;
   public static final int LONG_SIZE = 4;
   public static final int TYPE_SIZE = 4;
-  public static final byte[] FTYP_BYTES = {'f', 't', 'y', 'p'};
+  public static final byte[] FTYP_BYTES = { 'f', 't', 'y', 'p' };
 
   private final FileInputStream fileInput;
   private final int size;
@@ -34,7 +34,8 @@ public abstract class AtomParser {
     return extendedSize;
   }
 
-  public static AtomParser getAtomParser(FileInputStream fileInput) throws IOException {
+  public static AtomParser getAtomParser(FileInputStream fileInput)
+      throws IOException {
     int size = readInt(fileInput);
     if (size == 0) {
       // last atom of file
@@ -76,7 +77,8 @@ public abstract class AtomParser {
     return readBytes(fileInput, num);
   }
 
-  private static byte[] readBytes(FileInputStream fileInput, int num) throws IOException {
+  private static byte[] readBytes(FileInputStream fileInput, int num)
+      throws IOException {
     byte[] bytes = new byte[num];
     fileInput.read(bytes);
     return bytes;
