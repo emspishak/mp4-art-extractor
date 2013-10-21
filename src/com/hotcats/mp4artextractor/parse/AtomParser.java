@@ -34,6 +34,15 @@ public abstract class AtomParser {
     return bytesRead;
   }
 
+  protected void skipRest() throws IOException {
+    long toSkip = getSize() - getBytesRead();
+    long skipped = fileInput.skip(toSkip);
+    if (toSkip != skipped) {
+      throw new IOException("expected to skip " + toSkip
+          + " bytes but actually skipped " + skipped + " bytes.");
+    }
+  }
+
   public int getSize() {
     return size;
   }

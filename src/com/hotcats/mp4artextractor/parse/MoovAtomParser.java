@@ -1,6 +1,7 @@
 package com.hotcats.mp4artextractor.parse;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import com.hotcats.mp4artextractor.data.atom.MoovAtom;
 
@@ -12,8 +13,8 @@ public class MoovAtomParser extends AtomParser {
   }
 
   @Override
-  public MoovAtom parse() {
-    // TODO implement
-    return null;
+  public MoovAtom parse() throws IOException {
+    skipRest();
+    return new MoovAtom(this.getSize(), this.getExtendedSize());
   }
 }
