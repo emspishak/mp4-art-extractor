@@ -21,14 +21,14 @@ public class Mp4FilePrinter {
     System.out.println("  size: " + atom.getSize());
     System.out.println("  extendedSize: " + atom.getExtendedSize());
     switch (atom.getType()) {
+    case FREE:
+      // Do nothing, all fields have already been printed.
+      break;
     case FTYP:
       printFtypAtom((FtypAtom) atom);
       break;
     case MOOV:
       printMoovAtom((MoovAtom) atom);
-      break;
-    case FREE:
-      // Do nothing, all fields have already been printed.
       break;
     }
   }
