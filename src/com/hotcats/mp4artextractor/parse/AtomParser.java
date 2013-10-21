@@ -12,6 +12,7 @@ public abstract class AtomParser {
   public static final int INT_SIZE = 4;
   public static final int LONG_SIZE = 4;
   public static final int TYPE_SIZE = 4;
+  public static final byte[] FREE_BYTES = { 'f', 'r', 'e', 'e' };
   public static final byte[] FTYP_BYTES = { 'f', 't', 'y', 'p' };
   public static final byte[] MOOV_BYTES = { 'm', 'o', 'o', 'v' };
 
@@ -75,6 +76,8 @@ public abstract class AtomParser {
       return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
     } else if (Arrays.equals(MOOV_BYTES, type)) {
       return new MoovAtomParser(fileInput, bytesRead, size, extendedSize);
+    } else if (Arrays.equals(FREE_BYTES, type)) {
+      return new FreeAtomParser(fileInput, bytesRead, size, extendedSize);
     }
     throw new UnsupportedOperationException("Illegal type: "
         + Arrays.toString(type) + " (" + new String(type) + ")");

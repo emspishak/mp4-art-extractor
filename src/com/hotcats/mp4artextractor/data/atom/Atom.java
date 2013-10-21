@@ -1,7 +1,7 @@
 package com.hotcats.mp4artextractor.data.atom;
 
 
-public abstract class Atom {
+public class Atom {
   private final AtomType type;
   private final int size;
   private final long extendedSize;
