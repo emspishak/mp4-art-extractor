@@ -14,6 +14,7 @@ public abstract class AtomParser {
   public static final int TYPE_SIZE = 4;
   public static final byte[] FREE_BYTES = { 'f', 'r', 'e', 'e' };
   public static final byte[] FTYP_BYTES = { 'f', 't', 'y', 'p' };
+  public static final byte[] MDAT_BYTES = { 'm', 'd', 'a', 't' };
   public static final byte[] MOOV_BYTES = { 'm', 'o', 'o', 'v' };
 
   private final FileInputStream fileInput;
@@ -76,6 +77,8 @@ public abstract class AtomParser {
       return new FreeAtomParser(fileInput, bytesRead, size, extendedSize);
     } else if (Arrays.equals(FTYP_BYTES, type)) {
       return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
+    } else if (Arrays.equals(MDAT_BYTES, type)) {
+      return new MdatAtomParser(fileInput, bytesRead, size, extendedSize);
     } else if (Arrays.equals(MOOV_BYTES, type)) {
       return new MoovAtomParser(fileInput, bytesRead, size, extendedSize);
     }

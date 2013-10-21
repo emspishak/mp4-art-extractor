@@ -6,6 +6,7 @@ import java.util.List;
 import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.data.atom.Atom;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
+import com.hotcats.mp4artextractor.data.atom.MdatAtom;
 import com.hotcats.mp4artextractor.data.atom.MoovAtom;
 
 public class Mp4FilePrinter {
@@ -27,6 +28,9 @@ public class Mp4FilePrinter {
     case FTYP:
       printFtypAtom((FtypAtom) atom);
       break;
+    case MDAT:
+      printMdatAtom((MdatAtom) atom);
+      break;
     case MOOV:
       printMoovAtom((MoovAtom) atom);
       break;
@@ -37,6 +41,10 @@ public class Mp4FilePrinter {
     printKeyValue("major brand", ftypAtom.getMajorBrand());
     printKeyValue("minor version", ftypAtom.getMinorVersion());
     printKeyValueList("compatible brands", ftypAtom.getCompatibleBrands());
+  }
+
+  private static void printMdatAtom(MdatAtom mdatAtom) {
+
   }
 
   private static void printMoovAtom(MoovAtom moovAtom) {
