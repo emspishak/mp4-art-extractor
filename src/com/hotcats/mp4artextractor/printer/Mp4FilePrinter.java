@@ -27,6 +27,9 @@ public class Mp4FilePrinter {
     case MOOV:
       printMoovAtom((MoovAtom) atom);
       break;
+    case FREE:
+      // Do nothing, all fields have already been printed.
+      break;
     }
   }
 
