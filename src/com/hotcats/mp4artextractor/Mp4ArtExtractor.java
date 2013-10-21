@@ -1,5 +1,6 @@
 package com.hotcats.mp4artextractor;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -16,16 +17,17 @@ public class Mp4ArtExtractor {
     }
     System.out.println("Extracting album art from: " + args[0]);
 
+    File file = new File(args[0]);
     FileInputStream fileInput = null;
     try {
-      fileInput = new FileInputStream(args[0]);
+      fileInput = new FileInputStream(file);
     } catch (FileNotFoundException e) {
       System.out.println("Error, file not found: " + args[0]);
       System.exit(1);
     }
 
-    Mp4FileParser parser = new Mp4FileParser(fileInput);
-    Mp4File file = parser.parse();
-    Mp4FilePrinter.print(file);
+    Mp4FileParser parser = new Mp4FileParser(fileInput, file.length());
+    Mp4File mp4File = parser.parse();
+    Mp4FilePrinter.print(mp4File);
   }
 }
