@@ -23,8 +23,10 @@ public class Mp4FilePrinter {
     switch (atom.getType()) {
     case FTYP:
       printFtypAtom((FtypAtom) atom);
+      break;
     case MOOV:
       printMoovAtom((MoovAtom) atom);
+      break;
     }
   }
 
