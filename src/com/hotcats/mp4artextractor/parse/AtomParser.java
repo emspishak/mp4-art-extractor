@@ -72,12 +72,12 @@ public abstract class AtomParser {
       bytesRead += LONG_SIZE;
     }
 
-    if (Arrays.equals(FTYP_BYTES, type)) {
+    if (Arrays.equals(FREE_BYTES, type)) {
+      return new FreeAtomParser(fileInput, bytesRead, size, extendedSize);
+    } else if (Arrays.equals(FTYP_BYTES, type)) {
       return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
     } else if (Arrays.equals(MOOV_BYTES, type)) {
       return new MoovAtomParser(fileInput, bytesRead, size, extendedSize);
-    } else if (Arrays.equals(FREE_BYTES, type)) {
-      return new FreeAtomParser(fileInput, bytesRead, size, extendedSize);
     }
     throw new UnsupportedOperationException("Illegal type: "
         + Arrays.toString(type) + " (" + new String(type) + ")");
