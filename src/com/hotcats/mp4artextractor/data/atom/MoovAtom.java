@@ -17,7 +17,7 @@ public class MoovAtom extends Atom {
   }
 
   @Override
-  public void accept(Visitor visitor) {
-    visitor.visit(this);
+  public void accept(Visitor visitor, int indentationLevel) {
+    visitor.visit(this, indentationLevel);
   }
 }

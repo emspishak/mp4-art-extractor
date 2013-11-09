@@ -7,8 +7,8 @@ import com.hotcats.mp4artextractor.data.atom.SkipAtom;
 
 public interface Visitor {
 
-  public void visit(FtypAtom ftypAtom);
-  public void visit(MdatAtom mdatAtom);
-  public void visit(MoovAtom moovAtom);
-  public void visit(SkipAtom skipAtom);
+  public void visit(FtypAtom ftypAtom, int indentationLevel);
+  public void visit(MdatAtom mdatAtom, int indentationLevel);
+  public void visit(MoovAtom moovAtom, int indentationLevel);
+  public void visit(SkipAtom skipAtom, int indentationLevel);
 }

@@ -4,5 +4,5 @@ import com.hotcats.mp4artextractor.printer.Visitor;
 
 public interface Visitable {
 
-  public void accept(Visitor visitor);
+  public void accept(Visitor visitor, int indentationLevel);
 }

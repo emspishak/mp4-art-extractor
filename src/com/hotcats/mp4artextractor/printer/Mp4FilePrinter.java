@@ -13,6 +13,8 @@ import com.hotcats.mp4artextractor.data.atom.SkipAtom;
 
 public class Mp4FilePrinter implements Visitor {
 
+  private static final String INDENTATION = "    ";
+
   private final Mp4File mp4File;
 
   public Mp4FilePrinter(Mp4File mp4file) {
@@ -20,59 +22,68 @@ public class Mp4FilePrinter implements Visitor {
   }
 
   public void print() {
-    printAtomList(mp4File.getAtoms());
+    printAtomList(mp4File.getAtoms(), 0);
   }
 
-  private void printAtomList(AtomList atoms) {
+  private void printAtomList(AtomList atoms, int indentationLevel) {
     for (Atom a : atoms) {
-      print(a);
+      print(a, indentationLevel);
     }
   }
 
-  private void print(Atom atom) {
-    System.out.println("type: " + atom.getType());
-    System.out.println("  size: " + atom.getSize());
-    System.out.println("  extendedSize: " + atom.getExtendedSize());
+  private void print(Atom atom, int indentationLevel) {
+    println("type: " + atom.getType(), indentationLevel);
+    println("  size: " + atom.getSize(), indentationLevel);
+    println("  extendedSize: " + atom.getExtendedSize(), indentationLevel);
 
-    atom.accept(this);
+    atom.accept(this, indentationLevel);
   }
 
   @Override
-  public void visit(FtypAtom ftypAtom) {
-    printKeyValue("major brand", ftypAtom.getMajorBrand());
-    printKeyValue("minor version", ftypAtom.getMinorVersion());
-    printKeyValueList("compatible brands", ftypAtom.getCompatibleBrands());
+  public void visit(FtypAtom ftypAtom, int indentationLevel) {
+    printKeyValue("major brand", ftypAtom.getMajorBrand(), indentationLevel);
+    printKeyValue("minor version", ftypAtom.getMinorVersion(), indentationLevel);
+    printKeyValueList("compatible brands", ftypAtom.getCompatibleBrands(),
+        indentationLevel);
   }
 
   @Override
-  public void visit(MdatAtom mdatAtom) {
+  public void visit(MdatAtom mdatAtom, int indentationLevel) {
 
   }
 
   @Override
-  public void visit(MoovAtom moovAtom) {
+  public void visit(MoovAtom moovAtom, int indentationLevel) {
     // TODO implement
   }
 
   @Override
-  public void visit(SkipAtom skipAtom) {
-    System.out.println("  skipped");
+  public void visit(SkipAtom skipAtom, int indentationLevel) {
+    println("  skipped", indentationLevel);
   }
 
-  private void printKeyValue(String key, byte[] value) {
-    System.out.println("  " + key + ": " + Arrays.toString(value)
-        + " (" + bytesToString(value) + ")");
+  private void printKeyValue(String key, byte[] value, int indentationLevel) {
+    println("  " + key + ": " + Arrays.toString(value) + " ("
+        + bytesToString(value) + ")", indentationLevel);
   }
 
-  private void printKeyValueList(String key, List<byte[]> values) {
-    System.out.println("  " + key + ":");
+  private void printKeyValueList(String key, List<byte[]> values,
+      int indentationLevel) {
+    println("  " + key + ":", indentationLevel);
     for (byte[] value : values) {
-      System.out.println("    " + Arrays.toString(value)
-          + " (" + bytesToString(value) + ")");
+      println("    " + Arrays.toString(value) + " (" + bytesToString(value)
+          + ")", indentationLevel);
     }
   }
 
   private String bytesToString(byte[] bytes) {
     return new String(bytes);
+  }
+
+  private void println(String s, int indentationLevel) {
+    for (int i = 0; i < indentationLevel; i++) {
+      System.out.print(INDENTATION);
+    }
+    System.out.println(s);
   }
 }

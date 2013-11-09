@@ -27,5 +27,5 @@ public abstract class Atom implements Visitable {
   }
 
   @Override
-  public abstract void accept(Visitor visitor);
+  public abstract void accept(Visitor visitor, int indentationLevel);
 }
