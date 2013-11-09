@@ -1,38 +1,15 @@
 package com.hotcats.mp4artextractor.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.hotcats.mp4artextractor.data.atom.Atom;
 
 public class Mp4File {
 
-  private final List<Atom> atoms;
+  private final AtomList atoms;
 
-  private Mp4File(List<Atom> atoms) {
-    this.atoms = Collections.unmodifiableList(atoms);
+  public Mp4File(AtomList atoms) {
+    this.atoms = atoms;
   }
 
-  public List<Atom> getAtoms() {
+  public AtomList getAtoms() {
     return atoms;
-  }
-
-  public static class Builder {
-
-    private final List<Atom> atoms;
-
-    public Builder() {
-      atoms = new ArrayList<>();
-    }
-
-    public Builder addAtom(Atom atom) {
-      atoms.add(atom);
-      return this;
-    }
-
-    public Mp4File build() {
-      return new Mp4File(atoms);
-    }
   }
 }

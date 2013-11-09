@@ -3,9 +3,8 @@ package com.hotcats.mp4artextractor.parse;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import com.hotcats.mp4artextractor.data.AtomList;
 import com.hotcats.mp4artextractor.data.Mp4File;
-import com.hotcats.mp4artextractor.data.atom.Atom;
-import com.hotcats.mp4artextractor.parse.atom.AtomParser;
 
 public class Mp4FileParser {
 
@@ -18,19 +17,14 @@ public class Mp4FileParser {
   }
 
   public Mp4File parse() {
-    Mp4File.Builder builder = new Mp4File.Builder();
-    long bytesRead = 0;
+    AtomListParser parser = new AtomListParser(fileInput, fileSize);
+    AtomList atoms;
     try {
-      while (bytesRead < fileSize) {
-        AtomParser atomParser = AtomParser.getAtomParser(fileInput);
-        Atom atom = atomParser.parse();
-        bytesRead += atom.getSize();
-        builder.addAtom(atom);
-      }
-      return builder.build();
+      atoms = parser.parseAtomList();
     } catch (IOException e) {
       System.err.println("Error reading file: " + e.getMessage());
       return null;
     }
+    return new Mp4File(atoms);
   }
 }
