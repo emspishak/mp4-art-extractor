@@ -87,9 +87,10 @@ public abstract class AtomParser {
     if (parsers.containsKey(type)) {
       return parsers.get(type).getInstance(fileInput, bytesRead, size,
           extendedSize);
+    } else {
+      System.err.println("Skipping unknown atom type: " + type);
+      return new SkipAtomParser(fileInput, bytesRead, size, extendedSize, type);
     }
-
-    throw new UnsupportedOperationException("Illegal type: " + type);
   }
 
   protected FileInputStream getFileInput() {
