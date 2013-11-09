@@ -54,7 +54,7 @@ public class Mp4FilePrinter implements Visitor {
 
   @Override
   public void visit(MoovAtom moovAtom, int indentationLevel) {
-    // TODO implement
+    printAtomList(moovAtom.getAtoms(), indentationLevel + 1);
   }
 
   @Override
