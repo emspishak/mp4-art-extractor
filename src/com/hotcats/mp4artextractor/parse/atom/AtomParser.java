@@ -86,6 +86,10 @@ public abstract class AtomParser {
         + Arrays.toString(type) + " (" + new String(type) + ")");
   }
 
+  protected FileInputStream getFileInput() {
+    return fileInput;
+  }
+
   protected int readInt() throws IOException {
     return readInt(fileInput);
   }
