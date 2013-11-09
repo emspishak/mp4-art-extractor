@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hotcats.mp4artextractor.data.atom.AtomType;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
 
 public class FtypAtomParser extends AtomParser {
@@ -34,8 +35,8 @@ public class FtypAtomParser extends AtomParser {
 
   public static class Factory implements AtomParserFactory {
 
-    public FtypAtomParser getInstance(FileInputStream fileInput, int bytesRead,
-        int size, long extendedSize) {
+    public FtypAtomParser getInstance(AtomType type, FileInputStream fileInput,
+        int bytesRead, int size, long extendedSize) {
       return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
     }
   }

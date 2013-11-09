@@ -8,7 +8,7 @@ import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.data.atom.Atom;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
 import com.hotcats.mp4artextractor.data.atom.MdatAtom;
-import com.hotcats.mp4artextractor.data.atom.MoovAtom;
+import com.hotcats.mp4artextractor.data.atom.RecursiveAtom;
 import com.hotcats.mp4artextractor.data.atom.SkipAtom;
 
 public class Mp4FilePrinter implements Visitor {
@@ -53,8 +53,8 @@ public class Mp4FilePrinter implements Visitor {
   }
 
   @Override
-  public void visit(MoovAtom moovAtom, int indentationLevel) {
-    printAtomList(moovAtom.getAtoms(), indentationLevel + 1);
+  public void visit(RecursiveAtom recursiveAtom, int indentationLevel) {
+    printAtomList(recursiveAtom.getAtoms(), indentationLevel + 1);
   }
 
   @Override

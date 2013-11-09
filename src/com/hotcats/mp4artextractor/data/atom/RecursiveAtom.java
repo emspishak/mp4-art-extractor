@@ -3,12 +3,15 @@ package com.hotcats.mp4artextractor.data.atom;
 import com.hotcats.mp4artextractor.data.AtomList;
 import com.hotcats.mp4artextractor.printer.Visitor;
 
-public class MoovAtom extends Atom {
+/**
+ * An atom which is only made up of other atoms.
+ */
+public class RecursiveAtom extends Atom {
 
   private final AtomList atoms;
 
-  public MoovAtom(int size, long extendedSize, AtomList atoms) {
-    super(AtomType.MOOV, size, extendedSize);
+  public RecursiveAtom(AtomType type, int size, long extendedSize, AtomList atoms) {
+    super(type, size, extendedSize);
     this.atoms = atoms;
   }
 

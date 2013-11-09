@@ -11,6 +11,8 @@ public class AtomType {
   public static final AtomType MOOV =
       new AtomType(new byte[] { 'm', 'o', 'o', 'v' });
 
+  public static final AtomType[] RECURSIVE_ATOMS = { MOOV };
+
   private final byte[] bytes;
 
   public AtomType(byte[] bytes) {

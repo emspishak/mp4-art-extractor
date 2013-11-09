@@ -22,7 +22,9 @@ public abstract class AtomParser {
 
     parsersTemp.put(AtomType.FTYP, new FtypAtomParser.Factory());
     parsersTemp.put(AtomType.MDAT, new MdatAtomParser.Factory());
-    parsersTemp.put(AtomType.MOOV, new MoovAtomParser.Factory());
+    for (AtomType type : AtomType.RECURSIVE_ATOMS) {
+      parsersTemp.put(type, new RecursiveAtomParser.Factory());
+    }
 
     parsers = Collections.unmodifiableMap(parsersTemp);
   }
@@ -84,7 +86,7 @@ public abstract class AtomParser {
     }
 
     if (parsers.containsKey(type)) {
-      return parsers.get(type).getInstance(fileInput, bytesRead, size,
+      return parsers.get(type).getInstance(type, fileInput, bytesRead, size,
           extendedSize);
     } else {
       System.err.println("Skipping unknown atom type: " + type);
