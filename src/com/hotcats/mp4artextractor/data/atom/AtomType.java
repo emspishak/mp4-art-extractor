@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 public class AtomType {
 
-  public static final AtomType FREE =
-      new AtomType(new byte[] { 'f', 'r', 'e', 'e' });
   public static final AtomType FTYP =
       new AtomType(new byte[] { 'f', 't', 'y', 'p' });
   public static final AtomType MDAT =

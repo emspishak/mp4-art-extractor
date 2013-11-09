@@ -20,7 +20,6 @@ public abstract class AtomParser {
   static {
     Map<AtomType, AtomParserFactory> parsersTemp = new HashMap<>();
 
-    parsersTemp.put(AtomType.FREE, new FreeAtomParser.Factory());
     parsersTemp.put(AtomType.FTYP, new FtypAtomParser.Factory());
     parsersTemp.put(AtomType.MDAT, new MdatAtomParser.Factory());
     parsersTemp.put(AtomType.MOOV, new MoovAtomParser.Factory());
