@@ -28,6 +28,6 @@ public class Mp4ArtExtractor {
 
     Mp4FileParser parser = new Mp4FileParser(fileInput, file.length());
     Mp4File mp4File = parser.parse();
-    Mp4FilePrinter.print(mp4File);
+    new Mp4FilePrinter(mp4File).print();
   }
 }

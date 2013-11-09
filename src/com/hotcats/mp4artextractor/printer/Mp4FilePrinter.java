@@ -11,13 +11,19 @@ import com.hotcats.mp4artextractor.data.atom.MoovAtom;
 
 public class Mp4FilePrinter {
 
-  public static void print(Mp4File mp4File) {
+  private final Mp4File mp4File;
+
+  public Mp4FilePrinter(Mp4File mp4file) {
+    this.mp4File = mp4file;
+  }
+
+  public void print() {
     for (Atom a : mp4File.getAtoms()) {
       print(a);
     }
   }
 
-  public static void print(Atom atom) {
+  private void print(Atom atom) {
     System.out.println("type: " + atom.getType());
     System.out.println("  size: " + atom.getSize());
     System.out.println("  extendedSize: " + atom.getExtendedSize());
@@ -37,26 +43,26 @@ public class Mp4FilePrinter {
     }
   }
 
-  private static void printFtypAtom(FtypAtom ftypAtom) {
+  private void printFtypAtom(FtypAtom ftypAtom) {
     printKeyValue("major brand", ftypAtom.getMajorBrand());
     printKeyValue("minor version", ftypAtom.getMinorVersion());
     printKeyValueList("compatible brands", ftypAtom.getCompatibleBrands());
   }
 
-  private static void printMdatAtom(MdatAtom mdatAtom) {
+  private void printMdatAtom(MdatAtom mdatAtom) {
 
   }
 
-  private static void printMoovAtom(MoovAtom moovAtom) {
+  private void printMoovAtom(MoovAtom moovAtom) {
     // TODO implement
   }
 
-  private static void printKeyValue(String key, byte[] value) {
+  private void printKeyValue(String key, byte[] value) {
     System.out.println("  " + key + ": " + Arrays.toString(value)
         + " (" + bytesToString(value) + ")");
   }
 
-  private static void printKeyValueList(String key, List<byte[]> values) {
+  private void printKeyValueList(String key, List<byte[]> values) {
     System.out.println("  " + key + ":");
     for (byte[] value : values) {
       System.out.println("    " + Arrays.toString(value)
@@ -64,7 +70,7 @@ public class Mp4FilePrinter {
     }
   }
 
-  public static String bytesToString(byte[] bytes) {
+  private String bytesToString(byte[] bytes) {
     return new String(bytes);
   }
 }
