@@ -8,25 +8,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hotcats.mp4artextractor.data.atom.Atom;
+import com.hotcats.mp4artextractor.data.atom.AtomType;
 
 public abstract class AtomParser {
 
   public static final int INT_SIZE = 4;
   public static final int LONG_SIZE = 8;
   public static final int TYPE_SIZE = 4;
-  public static final byte[] FREE_BYTES = { 'f', 'r', 'e', 'e' };
-  public static final byte[] FTYP_BYTES = { 'f', 't', 'y', 'p' };
-  public static final byte[] MDAT_BYTES = { 'm', 'd', 'a', 't' };
-  public static final byte[] MOOV_BYTES = { 'm', 'o', 'o', 'v' };
 
-  public static final Map<RawAtomType, AtomParserFactory> parsers;
+  public static final Map<AtomType, AtomParserFactory> parsers;
   static {
-    Map<RawAtomType, AtomParserFactory> parsersTemp = new HashMap<>();
+    Map<AtomType, AtomParserFactory> parsersTemp = new HashMap<>();
 
-    parsersTemp.put(new RawAtomType(FREE_BYTES), new FreeAtomParser.Factory());
-    parsersTemp.put(new RawAtomType(FTYP_BYTES), new FtypAtomParser.Factory());
-    parsersTemp.put(new RawAtomType(MDAT_BYTES), new MdatAtomParser.Factory());
-    parsersTemp.put(new RawAtomType(MOOV_BYTES), new MoovAtomParser.Factory());
+    parsersTemp.put(AtomType.FREE, new FreeAtomParser.Factory());
+    parsersTemp.put(AtomType.FTYP, new FtypAtomParser.Factory());
+    parsersTemp.put(AtomType.MDAT, new MdatAtomParser.Factory());
+    parsersTemp.put(AtomType.MOOV, new MoovAtomParser.Factory());
 
     parsers = Collections.unmodifiableMap(parsersTemp);
   }
@@ -78,7 +75,7 @@ public abstract class AtomParser {
       // last atom of file
     }
 
-    RawAtomType type = new RawAtomType(readBytes(fileInput, TYPE_SIZE));
+    AtomType type = new AtomType(readBytes(fileInput, TYPE_SIZE));
     bytesRead += TYPE_SIZE;
 
     long extendedSize = 0;
