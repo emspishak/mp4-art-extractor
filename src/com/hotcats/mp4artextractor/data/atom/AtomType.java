@@ -10,8 +10,10 @@ public class AtomType {
       new AtomType(new byte[] { 'm', 'd', 'a', 't' });
   public static final AtomType MOOV =
       new AtomType(new byte[] { 'm', 'o', 'o', 'v' });
+  public static final AtomType TRAK =
+      new AtomType(new byte[] {'t', 'r', 'a', 'k' });
 
-  public static final AtomType[] RECURSIVE_ATOMS = { MOOV };
+  public static final AtomType[] RECURSIVE_ATOMS = { MOOV, TRAK };
 
   private final byte[] bytes;
 
