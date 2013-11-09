@@ -2,6 +2,8 @@ package com.hotcats.mp4artextractor.data.atom;
 
 import java.util.List;
 
+import com.hotcats.mp4artextractor.printer.Visitor;
+
 public class FtypAtom extends Atom {
 
   private final byte[] majorBrand;
@@ -26,5 +28,10 @@ public class FtypAtom extends Atom {
 
   public List<byte[]> getCompatibleBrands() {
     return compatibleBrands;
+  }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

@@ -9,7 +9,7 @@ import com.hotcats.mp4artextractor.data.atom.FtypAtom;
 import com.hotcats.mp4artextractor.data.atom.MdatAtom;
 import com.hotcats.mp4artextractor.data.atom.MoovAtom;
 
-public class Mp4FilePrinter {
+public class Mp4FilePrinter implements Visitor {
 
   private final Mp4File mp4File;
 
@@ -27,33 +27,29 @@ public class Mp4FilePrinter {
     System.out.println("type: " + atom.getType());
     System.out.println("  size: " + atom.getSize());
     System.out.println("  extendedSize: " + atom.getExtendedSize());
-    switch (atom.getType()) {
-    case FREE:
-      // Do nothing, all fields have already been printed.
-      break;
-    case FTYP:
-      printFtypAtom((FtypAtom) atom);
-      break;
-    case MDAT:
-      printMdatAtom((MdatAtom) atom);
-      break;
-    case MOOV:
-      printMoovAtom((MoovAtom) atom);
-      break;
-    }
+
+    atom.accept(this);
   }
 
-  private void printFtypAtom(FtypAtom ftypAtom) {
+  @Override
+  public void visit(Atom atom) {
+    // Already printed everything
+  }
+
+  @Override
+  public void visit(FtypAtom ftypAtom) {
     printKeyValue("major brand", ftypAtom.getMajorBrand());
     printKeyValue("minor version", ftypAtom.getMinorVersion());
     printKeyValueList("compatible brands", ftypAtom.getCompatibleBrands());
   }
 
-  private void printMdatAtom(MdatAtom mdatAtom) {
+  @Override
+  public void visit(MdatAtom mdatAtom) {
 
   }
 
-  private void printMoovAtom(MoovAtom moovAtom) {
+  @Override
+  public void visit(MoovAtom moovAtom) {
     // TODO implement
   }
 

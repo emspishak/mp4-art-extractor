@@ -1,6 +1,7 @@
 package com.hotcats.mp4artextractor.data.atom;
 
 import com.hotcats.mp4artextractor.data.AtomList;
+import com.hotcats.mp4artextractor.printer.Visitor;
 
 public class MoovAtom extends Atom {
 
@@ -13,5 +14,10 @@ public class MoovAtom extends Atom {
 
   public AtomList getAtoms() {
     return atoms;
+  }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }
