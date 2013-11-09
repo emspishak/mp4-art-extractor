@@ -3,6 +3,7 @@ package com.hotcats.mp4artextractor.printer;
 import java.util.Arrays;
 import java.util.List;
 
+import com.hotcats.mp4artextractor.data.AtomList;
 import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.data.atom.Atom;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
@@ -19,7 +20,11 @@ public class Mp4FilePrinter implements Visitor {
   }
 
   public void print() {
-    for (Atom a : mp4File.getAtoms()) {
+    printAtomList(mp4File.getAtoms());
+  }
+
+  private void printAtomList(AtomList atoms) {
+    for (Atom a : atoms) {
       print(a);
     }
   }
