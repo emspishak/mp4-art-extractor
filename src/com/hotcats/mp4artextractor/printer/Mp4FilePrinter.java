@@ -8,6 +8,7 @@ import com.hotcats.mp4artextractor.data.atom.Atom;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
 import com.hotcats.mp4artextractor.data.atom.MdatAtom;
 import com.hotcats.mp4artextractor.data.atom.MoovAtom;
+import com.hotcats.mp4artextractor.data.atom.SkipAtom;
 
 public class Mp4FilePrinter implements Visitor {
 
@@ -32,11 +33,6 @@ public class Mp4FilePrinter implements Visitor {
   }
 
   @Override
-  public void visit(Atom atom) {
-    // Already printed everything
-  }
-
-  @Override
   public void visit(FtypAtom ftypAtom) {
     printKeyValue("major brand", ftypAtom.getMajorBrand());
     printKeyValue("minor version", ftypAtom.getMinorVersion());
@@ -51,6 +47,11 @@ public class Mp4FilePrinter implements Visitor {
   @Override
   public void visit(MoovAtom moovAtom) {
     // TODO implement
+  }
+
+  @Override
+  public void visit(SkipAtom skipAtom) {
+    System.out.println("  skipped");
   }
 
   private void printKeyValue(String key, byte[] value) {

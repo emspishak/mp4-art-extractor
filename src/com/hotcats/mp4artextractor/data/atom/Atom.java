@@ -3,7 +3,7 @@ package com.hotcats.mp4artextractor.data.atom;
 import com.hotcats.mp4artextractor.printer.Visitor;
 
 
-public class Atom implements Visitable {
+public abstract class Atom implements Visitable {
   private final AtomType type;
   private final int size;
   private final long extendedSize;
@@ -27,7 +27,5 @@ public class Atom implements Visitable {
   }
 
   @Override
-  public void accept(Visitor visitor) {
-    visitor.visit(this);
-  }
+  public abstract void accept(Visitor visitor);
 }

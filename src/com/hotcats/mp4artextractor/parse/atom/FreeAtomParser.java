@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.hotcats.mp4artextractor.data.atom.Atom;
 import com.hotcats.mp4artextractor.data.atom.AtomType;
+import com.hotcats.mp4artextractor.data.atom.SkipAtom;
 
 
 public class FreeAtomParser extends AtomParser {
@@ -16,7 +17,7 @@ public class FreeAtomParser extends AtomParser {
   @Override
   public Atom parse() throws IOException {
     skipRest();
-    return new Atom(AtomType.FREE, getSize(), getExtendedSize());
+    return new SkipAtom(AtomType.FREE, getSize(), getExtendedSize());
   }
 
   public static class Factory implements AtomParserFactory {
