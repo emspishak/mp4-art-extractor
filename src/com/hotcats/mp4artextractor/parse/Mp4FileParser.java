@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.data.atom.Atom;
+import com.hotcats.mp4artextractor.parse.atom.AtomParser;
 
 public class Mp4FileParser {
 

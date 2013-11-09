@@ -1,4 +1,4 @@
-package com.hotcats.mp4artextractor.parse;
+package com.hotcats.mp4artextractor.parse.atom;
 
 import java.io.FileInputStream;
 import java.io.IOException;
