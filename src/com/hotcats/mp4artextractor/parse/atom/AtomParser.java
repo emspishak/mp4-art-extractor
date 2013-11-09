@@ -3,7 +3,9 @@ package com.hotcats.mp4artextractor.parse.atom;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.hotcats.mp4artextractor.data.atom.Atom;
 
@@ -16,6 +18,18 @@ public abstract class AtomParser {
   public static final byte[] FTYP_BYTES = { 'f', 't', 'y', 'p' };
   public static final byte[] MDAT_BYTES = { 'm', 'd', 'a', 't' };
   public static final byte[] MOOV_BYTES = { 'm', 'o', 'o', 'v' };
+
+  public static final Map<RawAtomType, AtomParserFactory> parsers;
+  static {
+    Map<RawAtomType, AtomParserFactory> parsersTemp = new HashMap<>();
+
+    parsersTemp.put(new RawAtomType(FREE_BYTES), new FreeAtomParser.Factory());
+    parsersTemp.put(new RawAtomType(FTYP_BYTES), new FtypAtomParser.Factory());
+    parsersTemp.put(new RawAtomType(MDAT_BYTES), new MdatAtomParser.Factory());
+    parsersTemp.put(new RawAtomType(MOOV_BYTES), new MoovAtomParser.Factory());
+
+    parsers = Collections.unmodifiableMap(parsersTemp);
+  }
 
   private final FileInputStream fileInput;
   private int bytesRead;
@@ -64,7 +78,7 @@ public abstract class AtomParser {
       // last atom of file
     }
 
-    byte[] type = readBytes(fileInput, TYPE_SIZE);
+    RawAtomType type = new RawAtomType(readBytes(fileInput, TYPE_SIZE));
     bytesRead += TYPE_SIZE;
 
     long extendedSize = 0;
@@ -73,17 +87,12 @@ public abstract class AtomParser {
       bytesRead += LONG_SIZE;
     }
 
-    if (Arrays.equals(FREE_BYTES, type)) {
-      return new FreeAtomParser(fileInput, bytesRead, size, extendedSize);
-    } else if (Arrays.equals(FTYP_BYTES, type)) {
-      return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
-    } else if (Arrays.equals(MDAT_BYTES, type)) {
-      return new MdatAtomParser(fileInput, bytesRead, size, extendedSize);
-    } else if (Arrays.equals(MOOV_BYTES, type)) {
-      return new MoovAtomParser(fileInput, bytesRead, size, extendedSize);
+    if (parsers.containsKey(type)) {
+      return parsers.get(type).getInstance(fileInput, bytesRead, size,
+          extendedSize);
     }
-    throw new UnsupportedOperationException("Illegal type: "
-        + Arrays.toString(type) + " (" + new String(type) + ")");
+
+    throw new UnsupportedOperationException("Illegal type: " + type);
   }
 
   protected FileInputStream getFileInput() {

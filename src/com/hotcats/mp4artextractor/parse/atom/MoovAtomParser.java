@@ -21,4 +21,12 @@ public class MoovAtomParser extends AtomParser {
     AtomList atoms = parser.parseAtomList();
     return new MoovAtom(this.getSize(), this.getExtendedSize(), atoms);
   }
+
+  public static class Factory implements AtomParserFactory {
+
+    public MoovAtomParser getInstance(FileInputStream fileInput, int bytesRead,
+        int size, long extendedSize) {
+      return new MoovAtomParser(fileInput, bytesRead, size, extendedSize);
+    }
+  }
 }

@@ -18,4 +18,12 @@ public class FreeAtomParser extends AtomParser {
     skipRest();
     return new Atom(AtomType.FREE, getSize(), getExtendedSize());
   }
+
+  public static class Factory implements AtomParserFactory {
+
+    public FreeAtomParser getInstance(FileInputStream fileInput, int bytesRead,
+        int size, long extendedSize) {
+      return new FreeAtomParser(fileInput, bytesRead, size, extendedSize);
+    }
+  }
 }

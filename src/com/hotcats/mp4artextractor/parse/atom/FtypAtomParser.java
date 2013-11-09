@@ -31,4 +31,12 @@ public class FtypAtomParser extends AtomParser {
     return new FtypAtom(getSize(), getExtendedSize(), majorBrand, minorVersion,
         compatibleBrands);
   }
+
+  public static class Factory implements AtomParserFactory {
+
+    public FtypAtomParser getInstance(FileInputStream fileInput, int bytesRead,
+        int size, long extendedSize) {
+      return new FtypAtomParser(fileInput, bytesRead, size, extendedSize);
+    }
+  }
 }

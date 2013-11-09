@@ -14,4 +14,12 @@ public class MdatAtomParser extends AtomParser {
   public MdatAtom parse() {
     return new MdatAtom(getSize(), getExtendedSize());
   }
+
+  public static class Factory implements AtomParserFactory {
+
+    public MdatAtomParser getInstance(FileInputStream fileInput, int bytesRead,
+        int size, long extendedSize) {
+      return new MdatAtomParser(fileInput, bytesRead, size, extendedSize);
+    }
+  }
 }
