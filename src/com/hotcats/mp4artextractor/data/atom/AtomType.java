@@ -6,6 +6,8 @@ public class AtomType {
 
   public static final AtomType FTYP =
       new AtomType(new byte[] { 'f', 't', 'y', 'p' });
+  public static final AtomType MDIA =
+      new AtomType(new byte[] { 'm', 'd', 'i', 'a' });
   public static final AtomType MDAT =
       new AtomType(new byte[] { 'm', 'd', 'a', 't' });
   public static final AtomType MOOV =
@@ -13,7 +15,7 @@ public class AtomType {
   public static final AtomType TRAK =
       new AtomType(new byte[] {'t', 'r', 'a', 'k' });
 
-  public static final AtomType[] RECURSIVE_ATOMS = { MOOV, TRAK };
+  public static final AtomType[] RECURSIVE_ATOMS = { MOOV, TRAK, MDIA };
 
   private final byte[] bytes;
 
