@@ -85,6 +85,13 @@ public abstract class AtomParser {
       bytesRead += LONG_SIZE;
     }
 
+    if (type.equals(AtomType.META)) {
+      // This is not in the spec, but the meta atom seems to have an extra byte
+      // here.
+      readInt(fileInput);
+      bytesRead += INT_SIZE;
+    }
+
     if (parsers.containsKey(type)) {
       return parsers.get(type).getInstance(type, fileInput, bytesRead, size,
           extendedSize);

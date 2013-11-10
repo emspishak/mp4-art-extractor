@@ -10,6 +10,8 @@ public class AtomType {
       new AtomType(new byte[] { 'm', 'd', 'i', 'a' });
   public static final AtomType MDAT =
       new AtomType(new byte[] { 'm', 'd', 'a', 't' });
+  public static final AtomType META =
+      new AtomType(new byte[] { 'm', 'e', 't', 'a' });
   public static final AtomType MOOV =
       new AtomType(new byte[] { 'm', 'o', 'o', 'v' });
   public static final AtomType TRAK =
@@ -17,7 +19,7 @@ public class AtomType {
   public static final AtomType UDTA =
       new AtomType(new byte[] {'u', 'd', 't', 'a' });
 
-  public static final AtomType[] RECURSIVE_ATOMS = { MDIA, MOOV, TRAK, UDTA };
+  public static final AtomType[] RECURSIVE_ATOMS = { MDIA, META, MOOV, TRAK, UDTA };
 
   private final byte[] bytes;
 
