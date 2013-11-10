@@ -8,8 +8,6 @@ public class AtomType {
       new AtomType(new byte[] { 'f', 't', 'y', 'p' });
   public static final AtomType MDIA =
       new AtomType(new byte[] { 'm', 'd', 'i', 'a' });
-  public static final AtomType MDAT =
-      new AtomType(new byte[] { 'm', 'd', 'a', 't' });
   public static final AtomType META =
       new AtomType(new byte[] { 'm', 'e', 't', 'a' });
   public static final AtomType MOOV =

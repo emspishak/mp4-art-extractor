@@ -7,7 +7,6 @@ import com.hotcats.mp4artextractor.data.AtomList;
 import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.data.atom.Atom;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
-import com.hotcats.mp4artextractor.data.atom.MdatAtom;
 import com.hotcats.mp4artextractor.data.atom.RecursiveAtom;
 import com.hotcats.mp4artextractor.data.atom.SkipAtom;
 
@@ -45,11 +44,6 @@ public class Mp4FilePrinter implements Visitor {
     printKeyValue("minor version", ftypAtom.getMinorVersion(), indentationLevel);
     printKeyValueList("compatible brands", ftypAtom.getCompatibleBrands(),
         indentationLevel);
-  }
-
-  @Override
-  public void visit(MdatAtom mdatAtom, int indentationLevel) {
-
   }
 
   @Override
