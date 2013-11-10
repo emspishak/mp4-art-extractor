@@ -6,6 +6,8 @@ public class AtomType {
 
   public static final AtomType FTYP =
       new AtomType(new byte[] { 'f', 't', 'y', 'p' });
+  public static final AtomType ILST =
+      new AtomType(new byte[] { 'i', 'l', 's', 't' });
   public static final AtomType MDIA =
       new AtomType(new byte[] { 'm', 'd', 'i', 'a' });
   public static final AtomType META =
@@ -17,7 +19,8 @@ public class AtomType {
   public static final AtomType UDTA =
       new AtomType(new byte[] {'u', 'd', 't', 'a' });
 
-  public static final AtomType[] RECURSIVE_ATOMS = { MDIA, META, MOOV, TRAK, UDTA };
+  public static final AtomType[] RECURSIVE_ATOMS =
+    { ILST, MDIA, META, MOOV, TRAK, UDTA };
 
   private final byte[] bytes;
 
