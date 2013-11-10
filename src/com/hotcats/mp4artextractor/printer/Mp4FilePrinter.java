@@ -10,6 +10,7 @@ import com.hotcats.mp4artextractor.data.atom.FtypAtom;
 import com.hotcats.mp4artextractor.data.atom.MdatAtom;
 import com.hotcats.mp4artextractor.data.atom.RecursiveAtom;
 import com.hotcats.mp4artextractor.data.atom.SkipAtom;
+import com.hotcats.mp4artextractor.data.atom.UdtaAtom;
 
 public class Mp4FilePrinter implements Visitor {
 
@@ -62,9 +63,21 @@ public class Mp4FilePrinter implements Visitor {
     println("  skipped", indentationLevel);
   }
 
+  @Override
+  public void visit(UdtaAtom udtaAtom, int indentationLevel) {
+    for (UdtaAtom.UserData userData : udtaAtom.getUserDatas()) {
+      printKeyValue(new String(userData.getType()),
+          String.valueOf(userData.getSize()), indentationLevel);
+    }
+  }
+
+  private void printKeyValue(String key, String value, int indentationLevel) {
+    println("  " + key + ": " + value, indentationLevel);
+  }
+
   private void printKeyValue(String key, byte[] value, int indentationLevel) {
-    println("  " + key + ": " + Arrays.toString(value) + " ("
-        + bytesToString(value) + ")", indentationLevel);
+    printKeyValue(key, Arrays.toString(value) + " (" + bytesToString(value)
+        + ")", indentationLevel);
   }
 
   private void printKeyValueList(String key, List<byte[]> values,

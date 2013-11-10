@@ -14,6 +14,8 @@ public class AtomType {
       new AtomType(new byte[] { 'm', 'o', 'o', 'v' });
   public static final AtomType TRAK =
       new AtomType(new byte[] {'t', 'r', 'a', 'k' });
+  public static final AtomType UDTA =
+      new AtomType(new byte[] {'u', 'd', 't', 'a' });
 
   public static final AtomType[] RECURSIVE_ATOMS = { MOOV, TRAK, MDIA };
 

@@ -22,6 +22,7 @@ public abstract class AtomParser {
 
     parsersTemp.put(AtomType.FTYP, new FtypAtomParser.Factory());
     parsersTemp.put(AtomType.MDAT, new MdatAtomParser.Factory());
+    parsersTemp.put(AtomType.UDTA, new UdtaAtomParser.Factory());
     for (AtomType type : AtomType.RECURSIVE_ATOMS) {
       parsersTemp.put(type, new RecursiveAtomParser.Factory());
     }
