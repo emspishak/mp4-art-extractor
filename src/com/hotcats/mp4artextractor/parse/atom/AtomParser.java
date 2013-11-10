@@ -99,6 +99,7 @@ public abstract class AtomParser {
   }
 
   protected int readInt() throws IOException {
+    bytesRead += INT_SIZE;
     return readInt(fileInput);
   }
 
@@ -108,6 +109,7 @@ public abstract class AtomParser {
   }
 
   protected long readLong() throws IOException {
+    bytesRead += LONG_SIZE;
     return readLong(fileInput);
   }
 
