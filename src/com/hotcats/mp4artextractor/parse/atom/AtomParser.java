@@ -131,7 +131,8 @@ public abstract class AtomParser {
 
   protected static int readNumber(FileInputStream fileInput, int num)
       throws IOException {
-    byte[] bytes = readBytes(fileInput, num);
+    byte[] bytes = new byte[INT_SIZE];
+    fileInput.read(bytes, INT_SIZE - num, num);
     return ByteBuffer.wrap(bytes).getInt();
   }
 
