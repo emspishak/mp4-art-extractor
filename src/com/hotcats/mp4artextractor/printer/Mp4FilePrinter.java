@@ -6,6 +6,7 @@ import java.util.List;
 import com.hotcats.mp4artextractor.data.AtomList;
 import com.hotcats.mp4artextractor.data.Mp4File;
 import com.hotcats.mp4artextractor.data.atom.Atom;
+import com.hotcats.mp4artextractor.data.atom.DataAtom;
 import com.hotcats.mp4artextractor.data.atom.FtypAtom;
 import com.hotcats.mp4artextractor.data.atom.RecursiveAtom;
 import com.hotcats.mp4artextractor.data.atom.SkipAtom;
@@ -39,6 +40,14 @@ public class Mp4FilePrinter implements Visitor {
   }
 
   @Override
+  public void visit(DataAtom dataAtom, int indentationLevel) {
+    printKeyValue("indicator", dataAtom.getIndicator(), indentationLevel);
+    printKeyValue("dataType", dataAtom.getDataType(), indentationLevel);
+    printKeyValue("country", dataAtom.getCountry(), indentationLevel);
+    printKeyValue("language", dataAtom.getLanguage(), indentationLevel);
+  }
+
+  @Override
   public void visit(FtypAtom ftypAtom, int indentationLevel) {
     printKeyValue("major brand", ftypAtom.getMajorBrand(), indentationLevel);
     printKeyValue("minor version", ftypAtom.getMinorVersion(), indentationLevel);
@@ -58,6 +67,10 @@ public class Mp4FilePrinter implements Visitor {
 
   private void printKeyValue(String key, String value, int indentationLevel) {
     println("  " + key + ": " + value, indentationLevel);
+  }
+
+  private void printKeyValue(String key, int value, int indentationLevel) {
+    printKeyValue(key, String.valueOf(value), indentationLevel);
   }
 
   private void printKeyValue(String key, byte[] value, int indentationLevel) {

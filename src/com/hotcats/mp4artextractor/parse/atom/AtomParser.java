@@ -20,6 +20,7 @@ public abstract class AtomParser {
   static {
     Map<AtomType, AtomParserFactory> parsersTemp = new HashMap<>();
 
+    parsersTemp.put(AtomType.DATA, new DataAtomParser.Factory());
     parsersTemp.put(AtomType.FTYP, new FtypAtomParser.Factory());
     for (AtomType type : AtomType.RECURSIVE_ATOMS) {
       parsersTemp.put(type, new RecursiveAtomParser.Factory());

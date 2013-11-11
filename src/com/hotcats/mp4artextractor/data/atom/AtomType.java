@@ -6,6 +6,8 @@ public class AtomType {
 
   public static final AtomType COVR =
       new AtomType(new byte[] { 'c', 'o', 'v', 'r' });
+  public static final AtomType DATA =
+      new AtomType(new byte[] { 'd', 'a', 't', 'a' });
   public static final AtomType FTYP =
       new AtomType(new byte[] { 'f', 't', 'y', 'p' });
   public static final AtomType ILST =
