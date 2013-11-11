@@ -124,6 +124,17 @@ public abstract class AtomParser {
     return ByteBuffer.wrap(bytes).getLong();
   }
 
+  protected int readNumber(int num) throws IOException {
+    bytesRead += num;
+    return readNumber(fileInput, num);
+  }
+
+  protected static int readNumber(FileInputStream fileInput, int num)
+      throws IOException {
+    byte[] bytes = readBytes(fileInput, num);
+    return ByteBuffer.wrap(bytes).getInt();
+  }
+
   protected byte[] readBytes(int num) throws IOException {
     bytesRead += num;
     return readBytes(fileInput, num);
