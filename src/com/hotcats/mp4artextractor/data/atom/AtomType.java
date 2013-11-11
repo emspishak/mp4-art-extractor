@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class AtomType {
 
+  public static final AtomType COVR =
+      new AtomType(new byte[] { 'c', 'o', 'v', 'r' });
   public static final AtomType FTYP =
       new AtomType(new byte[] { 'f', 't', 'y', 'p' });
   public static final AtomType ILST =
@@ -20,7 +22,7 @@ public class AtomType {
       new AtomType(new byte[] {'u', 'd', 't', 'a' });
 
   public static final AtomType[] RECURSIVE_ATOMS =
-    { ILST, MDIA, META, MOOV, TRAK, UDTA };
+    { COVR, ILST, MDIA, META, MOOV, TRAK, UDTA };
 
   private final byte[] bytes;
 
